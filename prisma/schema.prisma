@@ -1,0 +1,30 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Rsvp {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String?  @db.VarChar(190)
+  phone        String?  @db.VarChar(30)
+
+  // mapeia para a coluna existente "guests_count"
+  guestsCount  Int      @default(1) @map("guests_count")
+
+  // jsonb para lista de nomes dos convidados extras
+  guestNames   Json     @default("[]") @db.JsonB @map("guest_names")
+
+  message      String?
+  willAttend   Boolean  @default(true) @map("will_attend")
+
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@map("Rsvp") // usa exatamente a tabela "Rsvp" no Neon
+}
