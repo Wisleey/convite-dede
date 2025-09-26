@@ -1,7 +1,56 @@
 @import "tailwindcss";
 
-/* FORÇA MOBILE IGUAL AO DESKTOP - TODOS OS ELEMENTOS AMARELOS */
+/* FORÇA MOBILE IGUAL AO DESKTOP - LAYOUT E CORES */
 @media (max-width: 768px) {
+  /* AJUSTA LAYOUT PARA SER MAIS COMPACTO COMO DESKTOP */
+  .container {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* FORÇA BOTÕES EM LINHA COMO DESKTOP */
+  .flex.flex-col.sm\\:flex-row {
+    flex-direction: row !important;
+    gap: 0.5rem !important;
+  }
+  
+  /* AJUSTA TAMANHOS DE TEXTO PARA MOBILE */
+  .text-4xl.sm\\:text-5xl,
+  .text-5xl.sm\\:text-6xl,
+  .text-6xl.sm\\:text-7xl {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .text-3xl.sm\\:text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  /* AJUSTA PADDING DOS BOTÕES */
+  .py-3.sm\\:py-4 {
+    padding-top: 0.75rem !important;
+    padding-bottom: 0.75rem !important;
+  }
+  
+  .px-6.sm\\:px-8 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  /* AJUSTA SPACING ENTRE ELEMENTOS */
+  .mb-8.sm\\:mb-12 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mb-16 {
+    margin-bottom: 3rem !important;
+  }
+  
+  /* AJUSTA TAMANHO DA FOTO */
+  .w-48.h-48.sm\\:w-56.sm\\:h-56 {
+    width: 10rem !important;
+    height: 10rem !important;
+  }
   /* FORÇA TODOS OS BOTÕES - SEM EXCEÇÃO */
   button,
   [role="button"],
@@ -14,7 +63,7 @@
     border: 2px solid #fbbf24 !important;
     border-color: #fbbf24 !important;
   }
-  
+
   /* FORÇA BOTÕES COM CLASSES ESPECÍFICAS */
   .bg-gradient-to-r,
   .bg-yellow-400,
@@ -28,9 +77,14 @@
     background-color: #fbbf24 !important;
     color: #000000 !important;
   }
-  
+
   /* FORÇA TEXTOS E TÍTULOS DOURADOS */
-  h1, h2, h3, h4, h5, h6,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
   .text-yellow-400,
   .text-yellow-300,
   .text-yellow-500,
@@ -40,7 +94,7 @@
   .text-gold-600 {
     color: #fbbf24 !important;
   }
-  
+
   /* FORÇA TODOS OS ÍCONES SVG */
   svg,
   svg path,
@@ -50,7 +104,7 @@
     fill: #fbbf24 !important;
     stroke: #fbbf24 !important;
   }
-  
+
   /* FORÇA BADGES E LABELS */
   .badge,
   label,
@@ -58,7 +112,7 @@
     background-color: #fbbf24 !important;
     color: #000000 !important;
   }
-  
+
   /* FORÇA BORDAS DOURADAS */
   .border-yellow-400,
   .border-yellow-300,
@@ -69,7 +123,7 @@
   .border-gold-600 {
     border-color: #fbbf24 !important;
   }
-  
+
   /* FORÇA INPUTS VISÍVEIS */
   input,
   textarea,
@@ -79,34 +133,34 @@
     border: 1px solid #fbbf24 !important;
     border-color: #fbbf24 !important;
   }
-  
+
   /* FORÇA PLACEHOLDERS VISÍVEIS */
   input::placeholder,
   textarea::placeholder {
     color: #888888 !important;
   }
-  
+
   /* FORÇA ELEMENTOS DE HOVER */
   button:hover,
   [role="button"]:hover {
     background-color: #f59e0b !important;
     color: #000000 !important;
   }
-  
+
   /* FORÇA TODOS OS SPANS E DIVS COM TEXTO */
   span,
   div,
   p {
     color: inherit !important;
   }
-  
+
   /* FORÇA ELEMENTOS ESPECÍFICOS DO PROJETO */
   .animate-heartbeat,
   .animate-bounce,
   .animate-pulse {
     color: #fbbf24 !important;
   }
-  
+
   /* FORÇA CARDS E CONTAINERS */
   .glass-effect {
     background: rgba(0, 0, 0, 0.8) !important;
@@ -146,9 +200,11 @@
 }
 
 .video-glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2),
+    inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 .golden-text-glow {
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
+    0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
 }
