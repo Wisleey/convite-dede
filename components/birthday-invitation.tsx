@@ -270,10 +270,13 @@ export function BirthdayInvitation() {
   const openInGPS = () => {
     const { lat, lng } = eventDetails.coordinates;
     const address = encodeURIComponent(eventDetails.address);
-    
+
     // Detectar dispositivo móvel
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+    const isMobile =
+      /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      );
+
     if (isMobile) {
       // Para dispositivos móveis, tentar abrir app nativo primeiro
       if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
@@ -281,15 +284,15 @@ export function BirthdayInvitation() {
         const appleUrl = `maps://maps.apple.com/?daddr=${lat},${lng}`;
         const googleUrl = `comgooglemaps://?daddr=${lat},${lng}`;
         const fallbackUrl = `https://maps.google.com/maps?daddr=${lat},${lng}`;
-        
+
         // Tenta abrir Apple Maps
         window.location.href = appleUrl;
-        
+
         // Fallback para Google Maps se Apple Maps não estiver disponível
         setTimeout(() => {
           window.location.href = googleUrl;
         }, 500);
-        
+
         // Fallback final para web
         setTimeout(() => {
           window.open(fallbackUrl, "_blank");
@@ -298,9 +301,9 @@ export function BirthdayInvitation() {
         // Android - tenta Google Maps app primeiro
         const googleAppUrl = `google.navigation:q=${lat},${lng}`;
         const fallbackUrl = `https://maps.google.com/maps?daddr=${lat},${lng}`;
-        
+
         window.location.href = googleAppUrl;
-        
+
         // Fallback para web se app não estiver disponível
         setTimeout(() => {
           window.open(fallbackUrl, "_blank");
@@ -615,7 +618,7 @@ END:VCALENDAR`;
                   </div>
                 </div>
 
-                {/* Call to Action */}
+                {/* Call to Act */}
                 <div
                   className="text-center animate-bounce-in"
                   style={{ animationDelay: "2.4s" }}
