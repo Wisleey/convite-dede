@@ -1,29 +1,10 @@
-import type { Metadata, Viewport } from "next";
+import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { ForceTheme } from "@/components/force-theme";
 import "./globals.css";
-
-export const viewport: Viewport = {
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  themeColor: "#000000",
-  colorScheme: "dark",
-};
 
 export const metadata: Metadata = {
   title: "Convite de Aniversário - Dedé Sales 50 Anos",
   description: "Você está convidado para comemorar os 50 anos do Dedé Sales",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "black-translucent",
-    title: "Convite Dedé Sales",
-  },
-  formatDetection: {
-    telephone: false,
-  },
 };
 
 export default function RootLayout({
@@ -32,45 +13,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" style={{ backgroundColor: '#000000', colorScheme: 'dark' }}>
+    <html lang="pt-BR" className="dark">
       <head>
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta
-          name="apple-mobile-web-app-status-bar-style"
-          content="black-translucent"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
-        <meta name="msapplication-TileColor" content="#000000" />
-        <meta name="apple-mobile-web-app-title" content="Convite Dedé Sales" />
-        <meta name="application-name" content="Convite Dedé Sales" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                document.documentElement.style.backgroundColor = '#000000';
-                document.documentElement.style.colorScheme = 'dark';
-                document.documentElement.classList.add('dark');
-                document.body.style.backgroundColor = '#000000';
-                document.body.style.color = '#ffd700';
-              })();
-            `,
-          }}
-        />
       </head>
-      <body className="dark bg-black text-yellow-400" style={{ backgroundColor: '#000000', color: '#ffd700' }}>
-        <ForceTheme />
+      <body className="dark">
         {children}
         <Analytics />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.body.style.backgroundColor = '#000000';
-              document.body.style.color = '#ffd700';
-              document.documentElement.style.backgroundColor = '#000000';
-            `,
-          }}
-        />
       </body>
     </html>
   );

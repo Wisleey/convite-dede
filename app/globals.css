@@ -3,80 +3,26 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* FORÇA TOTAL - FUNDO PRETO EM QUALQUER LUGAR */
-* {
-  box-sizing: border-box !important;
-}
-
-html, body, #__next, #root, [data-reactroot] {
-  background-color: #000000 !important;
-  background: #000000 !important;
-  color: #ffd700 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  min-height: 100vh !important;
-  width: 100% !important;
-}
-
+/* TEMA PRETO SIMPLES */
 html {
-  color-scheme: dark !important;
-  -webkit-color-scheme: dark !important;
-  -webkit-text-size-adjust: 100% !important;
-  -ms-text-size-adjust: 100% !important;
+  background-color: #000000;
+  color-scheme: dark;
 }
 
 body {
-  font-family: system-ui, -apple-system, sans-serif !important;
-  -webkit-font-smoothing: antialiased !important;
-  -moz-osx-font-smoothing: grayscale !important;
-  overflow-x: hidden !important;
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
-}
-
-/* FORÇA EM TODOS OS ELEMENTOS */
-div, main, section, article, header, footer, nav, aside {
-  background-color: transparent !important;
-}
-
-/* FORÇA PARA MOBILE E WEBKIT */
-@supports (-webkit-appearance: none) {
-  html, body {
-    background-color: #000000 !important;
-    background: #000000 !important;
-  }
-}
-
-/* FORÇA PARA TODOS OS MEDIA QUERIES */
-@media screen {
-  html, body {
-    background-color: #000000 !important;
-    color: #ffd700 !important;
-  }
-}
-
-@media (max-width: 768px) {
-  html, body {
-    background-color: #000000 !important;
-    background: #000000 !important;
-  }
-}
-
-@layer base {
-  * {
-    border-color: rgba(255, 215, 0, 0.2) !important;
-    outline-color: rgba(255, 215, 0, 0.5) !important;
-  }
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+  color: #ffd700;
 }
 
 :root {
-  /* Atualizando cores para tema dourado e preto do convite */
-  --background: oklch(0.1 0 0); /* Preto profundo forçado */
-  --foreground: oklch(0.95 0.02 85); /* Dourado claro */
+  /* Cores para tema dourado e preto */
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.95 0.02 85);
   --card: oklch(0.15 0 0);
   --card-foreground: oklch(0.95 0.02 85);
   --popover: oklch(0.1 0 0);
   --popover-foreground: oklch(0.95 0.02 85);
-  --primary: oklch(0.75 0.18 85); /* Dourado brilhante */
+  --primary: oklch(0.75 0.18 85);
   --primary-foreground: oklch(0.1 0 0);
   --secondary: oklch(0.25 0 0);
   --secondary-foreground: oklch(0.95 0.02 85);
@@ -106,14 +52,13 @@ div, main, section, article, header, footer, nav, aside {
 }
 
 .dark {
-  /* Tema escuro com dourado e preto */
-  --background: oklch(0.1 0 0); /* Preto profundo */
-  --foreground: oklch(0.95 0.02 85); /* Dourado claro */
+  --background: oklch(0.1 0 0);
+  --foreground: oklch(0.95 0.02 85);
   --card: oklch(0.15 0 0);
   --card-foreground: oklch(0.95 0.02 85);
   --popover: oklch(0.1 0 0);
   --popover-foreground: oklch(0.95 0.02 85);
-  --primary: oklch(0.75 0.18 85); /* Dourado brilhante */
+  --primary: oklch(0.75 0.18 85);
   --primary-foreground: oklch(0.1 0 0);
   --secondary: oklch(0.25 0 0);
   --secondary-foreground: oklch(0.95 0.02 85);
@@ -144,7 +89,6 @@ div, main, section, article, header, footer, nav, aside {
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  /* Substituindo fontes serif por fontes modernas */
   --font-inter: var(--font-inter);
   --font-poppins: var(--font-poppins);
   --color-background: var(--background);
@@ -185,190 +129,95 @@ div, main, section, article, header, footer, nav, aside {
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Adicionando animações personalizadas para o convite */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Animações personalizadas para o convite */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes sparkle {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.1);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
 }
 
 @keyframes goldPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2),
-      0 0 60px rgba(255, 215, 0, 0.1);
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4),
-      0 0 90px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4), 0 0 90px rgba(255, 215, 0, 0.3);
   }
 }
 
 @keyframes slideInLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideInRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideInUp {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes fadeInScale {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes rotateGlow {
-  0% {
-    transform: rotate(0deg);
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-    filter: hue-rotate(360deg);
-  }
+  0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
+  100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
 }
 
 @keyframes textShimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 @keyframes bounceIn {
-  0% {
-    transform: scale(0.3) rotate(-10deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05) rotate(5deg);
-  }
-  70% {
-    transform: scale(0.9) rotate(-2deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
+  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.05) rotate(5deg); }
+  70% { transform: scale(0.9) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
 @keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.1);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.1);
-  }
-  70% {
-    transform: scale(1);
-  }
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
-}
-
-.animate-gold-pulse {
-  animation: goldPulse 2s ease-in-out infinite;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 1s ease-out;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 1s ease-out;
-}
-
-.animate-slide-in-up {
-  animation: slideInUp 1s ease-out;
-}
-
-.animate-fade-in-scale {
-  animation: fadeInScale 1.2s ease-out;
-}
-
-.animate-rotate-glow {
-  animation: rotateGlow 8s linear infinite;
-}
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
+.animate-gold-pulse { animation: goldPulse 2s ease-in-out infinite; }
+.animate-slide-in-left { animation: slideInLeft 1s ease-out; }
+.animate-slide-in-right { animation: slideInRight 1s ease-out; }
+.animate-slide-in-up { animation: slideInUp 1s ease-out; }
+.animate-fade-in-scale { animation: fadeInScale 1.2s ease-out; }
+.animate-rotate-glow { animation: rotateGlow 8s linear infinite; }
+.animate-bounce-in { animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
 
 .animate-text-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 215, 0, 0.8),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), transparent);
   background-size: 200% 100%;
   animation: textShimmer 3s ease-in-out infinite;
-}
-
-.animate-bounce-in {
-  animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.animate-heartbeat {
-  animation: heartbeat 2s ease-in-out infinite;
 }
 
 /* Efeitos de hover melhorados */
@@ -388,8 +237,7 @@ div, main, section, article, header, footer, nav, aside {
 }
 
 .video-glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2),
-    inset 0 0 20px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 /* Efeitos adicionais para tornar o convite mais impactante */
@@ -400,13 +248,8 @@ div, main, section, article, header, footer, nav, aside {
 }
 
 @keyframes gradientShift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
 .celebration-confetti::before {
@@ -417,20 +260,13 @@ div, main, section, article, header, footer, nav, aside {
 }
 
 @keyframes confettiFall {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
 /* Efeito de brilho dourado nos textos importantes */
 .golden-text-glow {
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
-    0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 /* Importação das fontes */
@@ -443,10 +279,5 @@ div, main, section, article, header, footer, nav, aside {
   --font-poppins: "Poppins", system-ui, sans-serif;
 }
 
-.font-inter {
-  font-family: var(--font-inter);
-}
-
-.font-poppins {
-  font-family: var(--font-poppins);
-}
+.font-inter { font-family: var(--font-inter); }
+.font-poppins { font-family: var(--font-poppins); }
