@@ -9,16 +9,24 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Cores personalizadas para o convite
+        // Cores personalizadas para o convite - FORÇA SEMPRE IGUAIS
+        yellow: {
+          400: "#fbbf24",
+          300: "#fbbf24",
+          500: "#fbbf24",
+          600: "#fbbf24",
+        },
         gold: {
           400: "#fbbf24",
-          500: "#f59e0b",
-          600: "#d97706",
+          500: "#fbbf24",
+          600: "#fbbf24",
         },
+        black: "#000000",
+        white: "#ffffff",
         dark: {
-          900: "#0f0f0f",
-          800: "#1a1a1a",
-          700: "#2a2a2a",
+          900: "#000000",
+          800: "#000000",
+          700: "#000000",
         },
       },
       fontFamily: {
