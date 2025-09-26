@@ -3,8 +3,11 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    // Verifica se estamos em build time (sem DATABASE_URL)
-    if (!process.env.DATABASE_URL) {
+    // Verifica se estamos em build time (várias condições)
+    if (
+      !process.env.DATABASE_URL ||
+      (process.env.NODE_ENV === "development" && !global.prisma)
+    ) {
       return NextResponse.json({
         success: true,
         data: {
@@ -18,18 +21,32 @@ export async function GET() {
       });
     }
 
-    // Busca as configurações do evento ou cria uma padrão
-    let eventSettings = await prisma.eventSettings.findFirst();
+    // Tenta buscar as configurações do evento com proteção extra
+    let eventSettings;
+    try {
+      eventSettings = await prisma.eventSettings.findFirst();
 
-    if (!eventSettings) {
-      // Cria configuração padrão se não existir
-      eventSettings = await prisma.eventSettings.create({
-        data: {
-          eventName: "Aniversário de Dedé Sales",
-          eventDate: new Date("2025-11-01T16:30:00-03:00"), // Data fixa do evento
-          location: "Praia de Jacumã, Conde - PB",
-        },
-      });
+      if (!eventSettings) {
+        // Cria configuração padrão se não existir
+        eventSettings = await prisma.eventSettings.create({
+          data: {
+            eventName: "Aniversário de Dedé Sales",
+            eventDate: new Date("2025-11-01T16:30:00-03:00"), // Data fixa do evento
+            location: "Praia de Jacumã, Conde - PB",
+          },
+        });
+      }
+    } catch (dbError) {
+      console.error("Erro específico do banco:", dbError);
+      // Retorna dados padrão se houver erro de banco
+      eventSettings = {
+        id: 1,
+        eventName: "Aniversário de Dedé Sales",
+        eventDate: new Date("2025-11-01T16:30:00-03:00"),
+        location: "Praia de Jacumã, Conde - PB",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
     }
 
     return NextResponse.json({
