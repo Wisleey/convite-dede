@@ -1,0 +1,22 @@
+{
+  "name": "Convite de Aniversário - Dedé Sales 50 Anos",
+  "short_name": "Convite Dedé",
+  "description": "Convite para celebração dos 50 anos do Dedé Sales",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/placeholder-logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/placeholder-logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
