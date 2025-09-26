@@ -32,10 +32,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark">
-      <body
-        className={`dark bg-black text-yellow-400 font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${poppins.variable}`}
-      >
+    <html lang="pt-BR">
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${poppins.variable}`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
