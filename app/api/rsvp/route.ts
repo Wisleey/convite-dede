@@ -14,6 +14,17 @@ interface RSVPRequest {
 
 export async function POST(request: NextRequest) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Banco de dados não disponível durante o build",
+        },
+        { status: 503 }
+      );
+    }
+
     const body: RSVPRequest = await request.json();
 
     // --- Validação básica ---
@@ -66,6 +77,15 @@ export async function POST(request: NextRequest) {
 
 export async function GET(request: NextRequest) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json({
+        success: true,
+        data: [],
+        stats: { totalRSVPs: 0, totalGuests: 0 },
+      });
+    }
+
     // Optional: busca por nome/email/telefone via ?q=
     const url = new URL(request.url);
     const q = (url.searchParams.get("q") ?? "").trim();

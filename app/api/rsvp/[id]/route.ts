@@ -6,6 +6,16 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        {
+          error: "Banco de dados não disponível durante o build",
+        },
+        { status: 503 }
+      );
+    }
+
     const id = parseInt(params.id);
 
     if (isNaN(id)) {
@@ -41,5 +51,3 @@ export async function DELETE(
     );
   }
 }
-
-

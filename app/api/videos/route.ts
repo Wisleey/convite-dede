@@ -5,6 +5,11 @@ import { prisma } from "@/lib/prisma";
 // GET - Buscar todos os vídeos ativos
 export async function GET(request: NextRequest) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json([]);
+    }
+
     const { searchParams } = new URL(request.url);
     const includeInactive = searchParams.get("includeInactive") === "true";
     const bandType = searchParams.get("bandType");
@@ -68,6 +73,16 @@ export async function GET(request: NextRequest) {
 // POST - Criar novo vídeo
 export async function POST(request: NextRequest) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        {
+          error: "Banco de dados não disponível durante o build",
+        },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
     const {
       title,
@@ -157,6 +172,16 @@ export async function POST(request: NextRequest) {
 // PUT - Atualizar configuração de vídeos (ativar/desativar em lote)
 export async function PUT(request: NextRequest) {
   try {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        {
+          error: "Banco de dados não disponível durante o build",
+        },
+        { status: 503 }
+      );
+    }
+
     const body = await request.json();
     const { action, videoIds, bandType } = body;
 
