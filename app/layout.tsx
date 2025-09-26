@@ -1,10 +1,29 @@
+import type React from "react";
 import type { Metadata } from "next";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Inter, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import { Suspense } from "react";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-poppins",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Convite de Aniversário - Dedé Sales 50 Anos",
   description: "Você está convidado para comemorar os 50 anos do Dedé Sales",
+  generator: "v0.app",
 };
 
 export default function RootLayout({
@@ -13,27 +32,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" style={{ backgroundColor: "#000000" }}>
-      <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              document.documentElement.style.backgroundColor = '#000000';
-              document.documentElement.classList.add('dark');
-              if (typeof window !== 'undefined') {
-                document.addEventListener('DOMContentLoaded', function() {
-                  document.body.style.backgroundColor = '#000000';
-                  document.body.style.background = 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%)';
-                });
-              }
-            `,
-          }}
-        />
-      </head>
-      <body className="dark" style={{ backgroundColor: "#000000" }}>
-        {children}
+    <html lang="pt-BR">
+      <body
+        className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${poppins.variable}`}
+      >
+        <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
     </html>

@@ -3,105 +3,52 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* TEMA PRETO FORÇADO E BOTÕES VISÍVEIS */
-* {
-  box-sizing: border-box;
-}
-
-html {
-  background-color: #000000 !important;
-  color-scheme: dark !important;
-}
-
-body {
-  background: linear-gradient(
-    135deg,
-    #000000 0%,
-    #1a1a1a 50%,
-    #000000 100%
-  ) !important;
-  color: #ffd700 !important;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-}
-
-/* FORÇA BOTÕES VISÍVEIS */
-button,
-.btn,
-[role="button"] {
-  color: inherit !important;
-}
-
-/* BOTÕES ESPECÍFICOS DO CONVITE */
-button[class*="bg-yellow"],
-button[class*="border-yellow"],
-.bg-yellow-400,
-.border-yellow-400 {
-  background-color: #fbbf24 !important;
-  border-color: #fbbf24 !important;
-  color: #000000 !important;
-}
-
-/* BOTÕES OUTLINE/GHOST */
-button[variant="outline"],
-.variant-outline {
-  background-color: transparent !important;
-  border: 2px solid #fbbf24 !important;
-  color: #fbbf24 !important;
-}
-
-button[variant="outline"]:hover,
-.variant-outline:hover {
-  background-color: #fbbf24 !important;
-  color: #000000 !important;
-}
-
 :root {
-  /* Cores para tema dourado e preto */
-  --background: oklch(0.1 0 0);
-  --foreground: oklch(0.95 0.02 85);
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0.02 85);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.95 0.02 85);
-  --primary: oklch(0.75 0.18 85);
+  /* Atualizando cores para tema dourado e preto do convite */
+  --background: oklch(0.1 0 0); /* Preto escuro forçado */
+  --foreground: oklch(0.95 0.02 85); /* Dourado claro */
+  --card: oklch(0.98 0.02 85); /* Bege claro dourado */
+  --card-foreground: oklch(0.2 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+  --primary: oklch(0.65 0.15 85); /* Dourado principal */
   --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0.02 85);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0.05 85);
-  --accent: oklch(0.25 0 0);
-  --accent-foreground: oklch(0.95 0.02 85);
+  --secondary: oklch(0.55 0.2 25); /* Vermelho elegante */
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.98 0.02 85); /* Bege suave */
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.65 0.15 85); /* Dourado para acentos */
+  --accent-foreground: oklch(0.1 0 0);
   --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.95 0.02 85);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.45 0.1 85);
-  --chart-1: oklch(0.75 0.18 85);
-  --chart-2: oklch(0.65 0.15 162);
-  --chart-3: oklch(0.7 0.15 70);
-  --chart-4: oklch(0.6 0.2 303);
-  --chart-5: oklch(0.65 0.18 16);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.9 0.01 85);
+  --input: oklch(0.97 0.01 85);
+  --ring: oklch(0.65 0.15 85);
+  --chart-1: oklch(0.7 0.18 85);
+  --chart-2: oklch(0.55 0.2 25);
+  --chart-3: oklch(0.5 0.15 200);
+  --chart-4: oklch(0.65 0.15 85);
+  --chart-5: oklch(0.7 0.18 85);
   --radius: 0.5rem;
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.95 0.02 85);
-  --sidebar-primary: oklch(0.75 0.18 85);
+  --sidebar: oklch(0.98 0.02 85);
+  --sidebar-foreground: oklch(0.2 0 0);
+  --sidebar-primary: oklch(0.65 0.15 85);
   --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.25 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0.02 85);
-  --sidebar-border: oklch(0.25 0 0);
-  --sidebar-ring: oklch(0.45 0.1 85);
+  --sidebar-accent: oklch(0.55 0.2 25);
+  --sidebar-accent-foreground: oklch(1 0 0);
+  --sidebar-border: oklch(0.9 0.01 85);
+  --sidebar-ring: oklch(0.65 0.15 85);
 }
 
 .dark {
-  --background: oklch(0.1 0 0);
-  --foreground: oklch(0.95 0.02 85);
+  /* Tema escuro com dourado e preto */
+  --background: oklch(0.1 0 0); /* Preto profundo */
+  --foreground: oklch(0.95 0.02 85); /* Dourado claro */
   --card: oklch(0.15 0 0);
   --card-foreground: oklch(0.95 0.02 85);
   --popover: oklch(0.1 0 0);
   --popover-foreground: oklch(0.95 0.02 85);
-  --primary: oklch(0.75 0.18 85);
+  --primary: oklch(0.75 0.18 85); /* Dourado brilhante */
   --primary-foreground: oklch(0.1 0 0);
   --secondary: oklch(0.25 0 0);
   --secondary-foreground: oklch(0.95 0.02 85);
@@ -132,6 +79,7 @@ button[variant="outline"]:hover,
 @theme inline {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  /* Substituindo fontes serif por fontes modernas */
   --font-inter: var(--font-inter);
   --font-poppins: var(--font-poppins);
   --color-background: var(--background);
@@ -181,74 +129,7 @@ button[variant="outline"]:hover,
   }
 }
 
-/* FORÇA TODOS OS BOTÕES SEREM VISÍVEIS - QUALQUER DISPOSITIVO */
-@layer components {
-  /* TODOS OS BOTÕES PRINCIPAIS - FORÇA AMARELO */
-  button[class*="bg-yellow-400"],
-  button[class*="border-yellow-400"],
-  button[class*="text-black"],
-  .bg-yellow-400\/90,
-  [class*="bg-yellow-400"] {
-    background-color: #fbbf24 !important;
-    background: #fbbf24 !important;
-    color: #000000 !important;
-    border: 2px solid #fbbf24 !important;
-    border-color: #fbbf24 !important;
-  }
-  
-  /* BOTÕES OUTLINE COM VARIANTE */
-  button[variant="outline"][class*="border-yellow-400"],
-  button[class*="border-2"][class*="border-yellow-400"] {
-    background-color: rgba(251, 191, 36, 0.9) !important;
-    background: rgba(251, 191, 36, 0.9) !important;
-    color: #000000 !important;
-    border: 2px solid #fbbf24 !important;
-    border-color: #fbbf24 !important;
-  }
-  
-  /* FORÇA ESPECÍFICA PARA MOBILE */
-  @media (max-width: 768px) {
-    button {
-      background-color: #fbbf24 !important;
-      color: #000000 !important;
-      border: 2px solid #fbbf24 !important;
-    }
-    
-    button[variant="outline"] {
-      background-color: rgba(251, 191, 36, 0.9) !important;
-    }
-  }
-  
-  /* REMOVE BACKDROP BLUR EM MOBILE - CAUSA PROBLEMAS */
-  @media (max-width: 768px) {
-    .backdrop-blur-sm {
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-    }
-  }
-
-  /* Hover states */
-  button:hover {
-    opacity: 0.9 !important;
-    background-color: #fbbf24 !important;
-  }
-
-  /* Força visibilidade de inputs */
-  input,
-  textarea,
-  select {
-    background-color: #1a1a1a !important;
-    color: #ffd700 !important;
-    border: 1px solid #fbbf24 !important;
-  }
-
-  /* Força visibilidade de labels */
-  label {
-    color: #fbbf24 !important;
-  }
-}
-
-/* Animações personalizadas para o convite */
+/* Adicionando animações personalizadas para o convite */
 @keyframes float {
   0%,
   100% {
@@ -386,32 +267,33 @@ button[variant="outline"]:hover,
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
 .animate-sparkle {
   animation: sparkle 2s ease-in-out infinite;
 }
+
 .animate-gold-pulse {
   animation: goldPulse 2s ease-in-out infinite;
 }
+
 .animate-slide-in-left {
   animation: slideInLeft 1s ease-out;
 }
+
 .animate-slide-in-right {
   animation: slideInRight 1s ease-out;
 }
+
 .animate-slide-in-up {
   animation: slideInUp 1s ease-out;
 }
+
 .animate-fade-in-scale {
   animation: fadeInScale 1.2s ease-out;
 }
+
 .animate-rotate-glow {
   animation: rotateGlow 8s linear infinite;
-}
-.animate-bounce-in {
-  animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.animate-heartbeat {
-  animation: heartbeat 2s ease-in-out infinite;
 }
 
 .animate-text-shimmer {
@@ -423,6 +305,14 @@ button[variant="outline"]:hover,
   );
   background-size: 200% 100%;
   animation: textShimmer 3s ease-in-out infinite;
+}
+
+.animate-bounce-in {
+  animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
 }
 
 /* Efeitos de hover melhorados */
@@ -485,21 +375,4 @@ button[variant="outline"]:hover,
 .golden-text-glow {
   text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
     0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
-}
-
-/* Importação das fontes */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-/* Variáveis de fonte */
-:root {
-  --font-inter: "Inter", system-ui, sans-serif;
-  --font-poppins: "Poppins", system-ui, sans-serif;
-}
-
-.font-inter {
-  font-family: var(--font-inter);
-}
-.font-poppins {
-  font-family: var(--font-poppins);
 }
