@@ -187,7 +187,7 @@ END:VCALENDAR`;
         />
       </div>
 
-      <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto glass-effect border-2 border-yellow-400/40 shadow-2xl shadow-yellow-400/30 relative animate-bounce-in hover-lift">
+      <Card className="w-full max-w-sm md:max-w-2xl max-h-[90vh] overflow-y-auto glass-effect border-2 border-yellow-400/40 shadow-2xl shadow-yellow-400/30 relative animate-bounce-in hover-lift">
         <CardHeader className="relative animate-slide-in-up">
           <Button
             onClick={onClose}

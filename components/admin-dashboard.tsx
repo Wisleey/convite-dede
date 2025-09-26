@@ -167,11 +167,11 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
   return (
     <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[55] overflow-y-auto">
       <div className="min-h-screen p-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-full md:max-w-7xl mx-auto">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
             <div>
-              <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-2">
+              <h1 className="text-2xl md:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-2">
                 Dashboard Administrativo
               </h1>
               <p className="text-white/80 text-lg">

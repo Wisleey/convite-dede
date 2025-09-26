@@ -445,13 +445,13 @@ END:VCALENDAR`;
 
         <div className="container mx-auto px-4 py-8 relative z-20">
           {/* Header Section */}
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-8 sm:mb-12 lg:mb-16">
-            <div className="text-center lg:text-left order-2 lg:order-1 animate-slide-in-left px-4 sm:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-8 lg:mb-16">
+            <div className="text-center lg:text-left order-2 lg:order-1 animate-slide-in-left">
               <div className="relative inline-block mb-8 animate-bounce-in">
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black text-yellow-400 mb-4 tracking-wider font-poppins">
+                <h1 className="text-4xl md:text-6xl lg:text-8xl font-black text-yellow-400 mb-4 tracking-wider font-poppins">
                   {eventDetails.name}
                 </h1>
-                <Star className="absolute -top-4 -left-4 w-6 h-6 text-yellow-400 animate-sparkle" />
+                <Star className="absolute -top-4 -left-4 w-6 h-6 text-yellow-400 animate-sparkle drop-shadow-lg" />
                 <Sparkles
                   className="absolute -top-2 -right-6 w-8 h-8 text-yellow-300 animate-bounce"
                   style={{ animationDelay: "1s" }}
@@ -463,12 +463,12 @@ END:VCALENDAR`;
               </div>
 
               <div
-                className="flex items-center justify-center lg:justify-start gap-4 sm:gap-6 mb-8 animate-fade-in-scale"
+                className="flex items-center justify-start gap-6 mb-8 animate-fade-in-scale"
                 style={{ animationDelay: "0.3s" }}
               >
                 <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent flex-1 max-w-20 sm:max-w-40 animate-pulse" />
                 <div className="relative animate-heartbeat">
-                  <span className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black text-yellow-400 font-poppins">
+                  <span className="text-6xl md:text-8xl lg:text-[10rem] font-black text-yellow-400 font-poppins">
                     {eventDetails.age}
                   </span>
                   <div className="absolute -top-8 -right-8 animate-bounce">
@@ -484,7 +484,7 @@ END:VCALENDAR`;
               </div>
 
               <h2
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-yellow-400 mb-6 tracking-wide font-poppins animate-slide-in-up"
+                className="text-3xl md:text-5xl lg:text-6xl font-black text-yellow-400 mb-6 tracking-wide font-poppins animate-slide-in-up"
                 style={{ animationDelay: "0.6s" }}
               >
                 ANOS
@@ -493,7 +493,7 @@ END:VCALENDAR`;
                 className="relative inline-block animate-fade-in-scale hover-lift"
                 style={{ animationDelay: "0.9s" }}
               >
-                <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-white font-bold px-4 sm:px-8 py-4 border border-yellow-400/40 rounded-lg bg-black/50 font-inter">
+                <p className="text-lg md:text-2xl lg:text-3xl text-white font-bold px-4 md:px-6 lg:px-8 py-4 border border-yellow-400/40 rounded-lg bg-black/50 font-inter">
                   VOCÊ ESTÁ CONVIDADO(A) PARA COMEMORAR COMIGO!
                 </p>
                 <Sparkles className="absolute -top-3 -right-3 w-8 h-8 text-yellow-400 animate-sparkle" />
@@ -503,7 +503,7 @@ END:VCALENDAR`;
 
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end animate-slide-in-right">
               <div className="relative inline-block hover-lift">
-                <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-full overflow-hidden border-4 border-yellow-400 shadow-2xl shadow-yellow-400/60 animate-bounce-in">
+                <div className="relative w-48 md:w-64 lg:w-80 h-48 md:h-64 lg:h-80 rounded-full overflow-hidden border-4 border-yellow-400 shadow-2xl shadow-yellow-400/60 animate-bounce-in">
                   <img
                     src="/images/dede-photo.png"
                     alt="Dedé Sales"
@@ -696,34 +696,32 @@ END:VCALENDAR`;
                   </div>
 
                   <div
-                    className="flex flex-col sm:flex-row gap-4 animate-slide-in-up"
+                    className="flex flex-col md:flex-row gap-4 animate-slide-in-up"
                     style={{ animationDelay: "4.2s" }}
                   >
                     <Button
                       onClick={openInGPS}
-                      className="flex-1 border-2 border-yellow-400 text-black hover:bg-yellow-400 hover:text-black font-bold py-3 sm:py-4 px-6 sm:px-8 text-base sm:text-lg bg-yellow-400/90 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-bounce-in"
+                      className="flex-1 border-2 border-yellow-400 text-black hover:bg-yellow-300 hover:text-black font-bold py-4 px-8 text-lg bg-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-bounce-in"
                     >
-                      <Navigation className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
+                      <Navigation className="mr-3 h-6 w-6 animate-pulse" />
                       Ver no GPS
                     </Button>
                     <Button
                       onClick={() => setShowRSVP(true)}
-                      variant="outline"
-                      className="flex-1 border-2 border-yellow-400 text-black hover:bg-yellow-400 hover:text-black font-bold py-3 sm:py-4 px-6 sm:px-8 text-base sm:text-lg bg-yellow-400/90 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-bounce-in animate-heartbeat"
+                      className="flex-1 border-2 border-yellow-400 text-black hover:bg-yellow-300 hover:text-black font-bold py-4 px-8 text-lg bg-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-bounce-in animate-heartbeat"
                       style={{ animationDelay: "0.2s" }}
                     >
-                      <Heart className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 animate-heartbeat" />
+                      <Heart className="mr-3 h-6 w-6 animate-heartbeat" />
                       Confirmar Presença
                     </Button>
                   </div>
 
                   <Button
                     onClick={addToCalendar}
-                    variant="outline"
-                    className="w-full border-2 border-yellow-400 text-black hover:bg-yellow-400 hover:text-black font-bold py-3 sm:py-4 px-6 sm:px-8 text-base sm:text-lg bg-yellow-400/90 backdrop-blur-sm transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-fade-in-scale"
+                    className="w-full border-2 border-yellow-400 text-black hover:bg-yellow-300 hover:text-black font-bold py-4 px-8 text-lg bg-yellow-400 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/30 hover:scale-105 font-inter hover-lift animate-fade-in-scale"
                     style={{ animationDelay: "4.5s" }}
                   >
-                    <Calendar className="mr-2 sm:mr-3 h-5 w-5 sm:h-6 sm:w-6 animate-pulse" />
+                    <Calendar className="mr-3 h-6 w-6 animate-pulse" />
                     Adicionar ao Calendário
                   </Button>
                 </div>
