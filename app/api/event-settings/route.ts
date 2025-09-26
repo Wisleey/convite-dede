@@ -3,11 +3,8 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    // Verifica se estamos em build time (várias condições)
-    if (
-      !process.env.DATABASE_URL ||
-      (process.env.NODE_ENV === "development" && !global.prisma)
-    ) {
+    // Verifica se estamos em build time (sem DATABASE_URL)
+    if (!process.env.DATABASE_URL) {
       return NextResponse.json({
         success: true,
         data: {
