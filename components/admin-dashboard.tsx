@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Input } from "@/components/ui/input"
+import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
   Users,
   Calendar,
@@ -17,77 +17,155 @@ import {
   TrendingUp,
   Clock,
   X,
-} from "lucide-react"
-import {
-  getRSVPData,
-  getRSVPStats,
-  deleteRSVP,
-  exportRSVPData,
-  type RSVPData,
-  type RSVPStats,
-} from "@/lib/rsvp-storage"
-import { useToast } from "@/hooks/use-toast"
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+
+interface RSVPData {
+  id: number;
+  name: string;
+  email?: string;
+  phone?: string;
+  guestsCount: number;
+  guestNames?: string[];
+  message?: string;
+  willAttend: boolean;
+  createdAt: string;
+}
+
+interface RSVPStats {
+  totalRSVPs: number;
+  totalGuests: number;
+}
 
 interface AdminDashboardProps {
-  isOpen: boolean
-  onClose: () => void
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
-  const [rsvpData, setRsvpData] = useState<RSVPData[]>([])
-  const [stats, setStats] = useState<RSVPStats>({ totalConfirmations: 0, totalGuests: 0, lastUpdated: "" })
-  const [searchTerm, setSearchTerm] = useState("")
-  const [selectedRSVP, setSelectedRSVP] = useState<RSVPData | null>(null)
-  const { toast } = useToast()
+  const [rsvpData, setRsvpData] = useState<RSVPData[]>([]);
+  const [stats, setStats] = useState<RSVPStats>({
+    totalRSVPs: 0,
+    totalGuests: 0,
+  });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedRSVP, setSelectedRSVP] = useState<RSVPData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
     if (isOpen) {
-      loadData()
+      loadData();
     }
-  }, [isOpen])
+  }, [isOpen]);
 
-  const loadData = () => {
-    setRsvpData(getRSVPData())
-    setStats(getRSVPStats())
-  }
+  const loadData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch("/api/rsvp");
+      const result = await response.json();
 
-  const handleDelete = (id: string) => {
-    deleteRSVP(id)
-    loadData()
-    toast({
-      title: "Confirmação removida",
-      description: "A confirmação foi removida com sucesso.",
-    })
-  }
+      if (result.success) {
+        setRsvpData(result.data || []);
+        setStats(result.stats || { totalRSVPs: 0, totalGuests: 0 });
+      } else {
+        throw new Error(result.error || "Erro ao carregar dados");
+      }
+    } catch (error) {
+      console.error("Erro ao carregar dados do RSVP:", error);
+      toast({
+        title: "Erro ao carregar dados",
+        description: "Não foi possível carregar os dados das confirmações.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    try {
+      const response = await fetch(`/api/rsvp/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        await loadData(); // Recarrega os dados
+        toast({
+          title: "Confirmação removida",
+          description: "A confirmação foi removida com sucesso.",
+        });
+      } else {
+        throw new Error("Erro ao remover confirmação");
+      }
+    } catch (error) {
+      toast({
+        title: "Erro ao remover",
+        description: "Não foi possível remover a confirmação.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleExport = () => {
-    const csvData = exportRSVPData()
-    const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" })
-    const link = document.createElement("a")
-    const url = URL.createObjectURL(blob)
-    link.setAttribute("href", url)
-    link.setAttribute("download", `confirmacoes-aniversario-${new Date().toISOString().split("T")[0]}.csv`)
-    link.style.visibility = "hidden"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
+    // Organiza todos os nomes em ordem alfabética
+    const allNames: string[] = [];
+
+    // Ordena os RSVPs por nome alfabeticamente
+    const sortedRsvpData = [...rsvpData].sort((a, b) =>
+      a.name.localeCompare(b.name, "pt-BR")
+    );
+
+    // Para cada RSVP, adiciona o nome principal e depois os convidados
+    sortedRsvpData.forEach((rsvp) => {
+      // Adiciona o nome principal
+      allNames.push(rsvp.name);
+
+      // Adiciona os nomes dos convidados em ordem alfabética
+      if (Array.isArray(rsvp.guestNames) && rsvp.guestNames.length > 0) {
+        const sortedGuestNames = [...rsvp.guestNames].sort((a, b) =>
+          a.localeCompare(b, "pt-BR")
+        );
+        allNames.push(...sortedGuestNames);
+      }
+    });
+
+    // Cria o CSV apenas com os nomes, um por linha
+    const csvHeaders = "Nome\n";
+    const csvData = allNames.map((name) => `"${name}"`).join("\n");
+    const fullCsvData = csvHeaders + csvData;
+
+    const blob = new Blob([fullCsvData], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute(
+      "download",
+      `confirmacoes-aniversario-${new Date().toISOString().split("T")[0]}.csv`
+    );
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
     toast({
       title: "Dados exportados",
-      description: "Os dados foram exportados para um arquivo CSV.",
-    })
-  }
+      description:
+        "Os dados foram exportados para um arquivo CSV com nomes em ordem alfabética.",
+    });
+  };
 
   const filteredData = rsvpData.filter(
     (rsvp) =>
       rsvp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      rsvp.email.toLowerCase().includes(searchTerm.toLowerCase()),
-  )
+      (rsvp.email &&
+        rsvp.email.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
-  if (!isOpen) return null
+  if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-50 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-md z-[55] overflow-y-auto">
       <div className="min-h-screen p-4">
         <div className="max-w-7xl mx-auto">
           {/* Header */}
@@ -96,7 +174,9 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
               <h1 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 mb-2">
                 Dashboard Administrativo
               </h1>
-              <p className="text-white/80 text-lg">Gerencie as confirmações do seu aniversário</p>
+              <p className="text-white/80 text-lg">
+                Gerencie as confirmações do seu aniversário
+              </p>
             </div>
             <Button
               onClick={onClose}
@@ -117,8 +197,12 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                     <Users className="h-8 w-8 text-black" />
                   </div>
                   <div>
-                    <p className="text-yellow-400 font-semibold">Total de Confirmações</p>
-                    <p className="text-3xl font-black text-white">{stats.totalConfirmations}</p>
+                    <p className="text-yellow-400 font-semibold">
+                      Total de Confirmações
+                    </p>
+                    <p className="text-3xl font-black text-white">
+                      {stats.totalRSVPs}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -131,8 +215,12 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                     <TrendingUp className="h-8 w-8 text-black" />
                   </div>
                   <div>
-                    <p className="text-yellow-400 font-semibold">Total de Convidados</p>
-                    <p className="text-3xl font-black text-white">{stats.totalGuests}</p>
+                    <p className="text-yellow-400 font-semibold">
+                      Total de Convidados
+                    </p>
+                    <p className="text-3xl font-black text-white">
+                      {stats.totalGuests}
+                    </p>
                   </div>
                 </div>
               </CardContent>
@@ -145,9 +233,15 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                     <Clock className="h-8 w-8 text-black" />
                   </div>
                   <div>
-                    <p className="text-yellow-400 font-semibold">Última Atualização</p>
+                    <p className="text-yellow-400 font-semibold">
+                      Última Atualização
+                    </p>
                     <p className="text-lg font-semibold text-white">
-                      {stats.lastUpdated ? new Date(stats.lastUpdated).toLocaleString("pt-BR") : "Nenhuma"}
+                      {rsvpData.length > 0
+                        ? new Date(rsvpData[0].createdAt).toLocaleString(
+                            "pt-BR"
+                          )
+                        : "Nenhuma"}
                     </p>
                   </div>
                 </div>
@@ -192,7 +286,9 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                 <div className="text-center py-12">
                   <Users className="h-16 w-16 text-yellow-400/50 mx-auto mb-4" />
                   <p className="text-white/60 text-lg">
-                    {searchTerm ? "Nenhuma confirmação encontrada" : "Nenhuma confirmação recebida ainda"}
+                    {searchTerm
+                      ? "Nenhuma confirmação encontrada"
+                      : "Nenhuma confirmação recebida ainda"}
                   </p>
                 </div>
               ) : (
@@ -206,9 +302,30 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-3">
-                              <h3 className="text-xl font-bold text-white">{rsvp.name}</h3>
+                              <Button
+                                onClick={() => setSelectedRSVP(rsvp)}
+                                variant="ghost"
+                                size="sm"
+                                className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-400/10"
+                              >
+                                Ver Detalhes
+                              </Button>
+                              <Button
+                                onClick={() => handleDelete(rsvp.id)}
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-400 hover:text-red-300 hover:bg-red-400/10"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                            <div className="flex items-center gap-3 mb-3">
+                              <h3 className="text-xl font-bold text-white">
+                                {rsvp.name}
+                              </h3>
                               <Badge className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-semibold">
-                                {rsvp.guests} {Number.parseInt(rsvp.guests) === 1 ? "pessoa" : "pessoas"}
+                                {rsvp.guestsCount}{" "}
+                                {rsvp.guestsCount === 1 ? "pessoa" : "pessoas"}
                               </Badge>
                             </div>
 
@@ -231,7 +348,9 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
                               <div className="mb-4">
                                 <div className="flex items-center gap-2 mb-2">
                                   <MessageCircle className="h-4 w-4 text-yellow-400" />
-                                  <span className="text-yellow-400 font-semibold">Mensagem:</span>
+                                  <span className="text-yellow-400 font-semibold">
+                                    Mensagem:
+                                  </span>
                                 </div>
                                 <p className="text-white/80 bg-black/30 p-3 rounded-lg border border-yellow-400/20">
                                   {rsvp.message}
@@ -241,27 +360,13 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
 
                             <div className="flex items-center gap-2 text-sm text-white/60">
                               <Calendar className="h-4 w-4" />
-                              <span>Confirmado em: {new Date(rsvp.confirmedAt).toLocaleString("pt-BR")}</span>
+                              <span>
+                                Confirmado em:{" "}
+                                {new Date(rsvp.createdAt).toLocaleString(
+                                  "pt-BR"
+                                )}
+                              </span>
                             </div>
-                          </div>
-
-                          <div className="flex gap-2">
-                            <Button
-                              onClick={() => setSelectedRSVP(rsvp)}
-                              variant="ghost"
-                              size="sm"
-                              className="text-yellow-400 hover:text-yellow-300 hover:bg-yellow-400/10"
-                            >
-                              Ver Detalhes
-                            </Button>
-                            <Button
-                              onClick={() => handleDelete(rsvp.id)}
-                              variant="ghost"
-                              size="sm"
-                              className="text-red-400 hover:text-red-300 hover:bg-red-400/10"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
                           </div>
                         </div>
                       </CardContent>
@@ -300,38 +405,66 @@ export function AdminDashboard({ isOpen, onClose }: AdminDashboardProps) {
               </div>
               {selectedRSVP.email && (
                 <div>
-                  <label className="text-yellow-400 font-semibold">Email:</label>
+                  <label className="text-yellow-400 font-semibold">
+                    Email:
+                  </label>
                   <p className="text-white">{selectedRSVP.email}</p>
                 </div>
               )}
               {selectedRSVP.phone && (
                 <div>
-                  <label className="text-yellow-400 font-semibold">Telefone:</label>
+                  <label className="text-yellow-400 font-semibold">
+                    Telefone:
+                  </label>
                   <p className="text-white">{selectedRSVP.phone}</p>
                 </div>
               )}
               <div>
-                <label className="text-yellow-400 font-semibold">Convidados:</label>
+                <label className="text-yellow-400 font-semibold">
+                  Convidados:
+                </label>
                 <p className="text-white">
-                  {selectedRSVP.guests} {Number.parseInt(selectedRSVP.guests) === 1 ? "pessoa" : "pessoas"}
+                  {selectedRSVP.guestsCount}{" "}
+                  {selectedRSVP.guestsCount === 1 ? "pessoa" : "pessoas"}
                 </p>
               </div>
+              {selectedRSVP.guestNames &&
+                selectedRSVP.guestNames.length > 0 && (
+                  <div>
+                    <label className="text-yellow-400 font-semibold">
+                      Nomes dos Convidados:
+                    </label>
+                    <ul className="text-white mt-2">
+                      {selectedRSVP.guestNames.map((name, index) => (
+                        <li key={index} className="ml-4">
+                          • {name}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               {selectedRSVP.message && (
                 <div>
-                  <label className="text-yellow-400 font-semibold">Mensagem:</label>
+                  <label className="text-yellow-400 font-semibold">
+                    Mensagem:
+                  </label>
                   <p className="text-white bg-black/30 p-3 rounded-lg border border-yellow-400/20 mt-2">
                     {selectedRSVP.message}
                   </p>
                 </div>
               )}
               <div>
-                <label className="text-yellow-400 font-semibold">Data de Confirmação:</label>
-                <p className="text-white">{new Date(selectedRSVP.confirmedAt).toLocaleString("pt-BR")}</p>
+                <label className="text-yellow-400 font-semibold">
+                  Data de Confirmação:
+                </label>
+                <p className="text-white">
+                  {new Date(selectedRSVP.createdAt).toLocaleString("pt-BR")}
+                </p>
               </div>
             </CardContent>
           </Card>
         </div>
       )}
     </div>
-  )
+  );
 }

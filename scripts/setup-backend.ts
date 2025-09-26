@@ -28,7 +28,7 @@ const rsvpDatabase: RSVPData[] = [];
 const eventDatabase: EventData[] = [
   {
     id: "dede-sales-50",
-    name: "Aniversário de Dedê Sales - 50 Anos",
+    name: "Aniversário de Dedé Sales - 50 Anos",
     date: new Date("2024-11-01T16:30:00"),
     location: "Praia de Jacumã",
     coordinates: {

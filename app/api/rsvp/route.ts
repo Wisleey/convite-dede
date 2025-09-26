@@ -1,18 +1,6 @@
 // app/api/rsvp/route.ts
 import { type NextRequest, NextResponse } from "next/server";
-import { neon, neonConfig } from "@neondatabase/serverless";
-
-// Cache de conexão para Next.js / serverless
-neonConfig.fetchConnectionCache = true;
-
-const DATABASE_URL = process.env.DATABASE_URL;
-if (!DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL não definida. Coloque no .env a URL do Neon com sslmode=require."
-  );
-}
-
-const sql = neon(DATABASE_URL);
+import { prisma } from "@/lib/prisma";
 
 interface RSVPRequest {
   name: string;
@@ -42,51 +30,25 @@ export async function POST(request: NextRequest) {
     const guests = Number.isFinite(body.guests_count as number)
       ? Number(body.guests_count)
       : 1;
-    const guests_count = Math.max(1, Math.min(99, guests)); // 1..99
+    const guestsCount = Math.max(1, Math.min(99, guests)); // 1..99
     const message = body.message?.trim() || null;
-    const will_attend = body.will_attend === false ? false : true;
-    const guest_names = Array.isArray(body.guest_names) ? body.guest_names : [];
+    const willAttend = body.will_attend === false ? false : true;
+    const guestNames = Array.isArray(body.guest_names) ? body.guest_names : [];
 
-    // Obs: se a coluna guest_names for JSON/JSONB, fazemos CAST explícito (::jsonb)
-    const result = await sql/* sql */ `
-      INSERT INTO rsvps (
+    // Usando Prisma para consistência
+    const rsvpData = await prisma.rsvp.create({
+      data: {
         name,
         email,
         phone,
-        guests_count,
-        guest_names,
+        guestsCount,
+        guestNames,
         message,
-        will_attend,
-        created_at,
-        updated_at
-      )
-      VALUES (
-        ${name},
-        ${email},
-        ${phone},
-        ${guests_count},
-        ${JSON.stringify(guest_names)}::jsonb,
-        ${message},
-        ${will_attend},
-        NOW(),
-        NOW()
-      )
-      RETURNING
-        id,
-        name,
-        email,
-        phone,
-        guests_count,
-        guest_names,
-        message,
-        will_attend,
-        created_at,
-        updated_at
-    `;
+        willAttend,
+      },
+    });
 
-    const rsvpData = result[0];
-
-    console.log("[RSVP] Salvo no Neon:", rsvpData);
+    console.log("[RSVP] Salvo com Prisma:", rsvpData);
 
     return NextResponse.json({
       success: true,
@@ -108,43 +70,46 @@ export async function GET(request: NextRequest) {
     const url = new URL(request.url);
     const q = (url.searchParams.get("q") ?? "").trim();
 
-    const where =
+    const whereCondition =
       q.length > 0
-        ? sql`WHERE will_attend = true AND (name ILIKE ${
-            "%" + q + "%"
-          } OR email ILIKE ${"%" + q + "%"} OR phone ILIKE ${"%" + q + "%"})`
-        : sql`WHERE will_attend = true`;
+        ? {
+            willAttend: true,
+            OR: [
+              { name: { contains: q, mode: "insensitive" as const } },
+              { email: { contains: q, mode: "insensitive" as const } },
+              { phone: { contains: q, mode: "insensitive" as const } },
+            ],
+          }
+        : { willAttend: true };
 
-    const rsvps = await sql/* sql */ `
-      SELECT
-        id,
-        name,
-        email,
-        phone,
-        guests_count,
-        guest_names,
-        message,
-        will_attend,
-        created_at
-      FROM rsvps
-      ${where}
-      ORDER BY created_at DESC
-    `;
+    const rsvps = await prisma.rsvp.findMany({
+      where: whereCondition,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        phone: true,
+        guestsCount: true,
+        guestNames: true,
+        message: true,
+        willAttend: true,
+        createdAt: true,
+      },
+    });
 
-    const stats = await sql/* sql */ `
-      SELECT
-        COUNT(*)::int                                AS total_confirmations,
-        COALESCE(SUM(guests_count), 0)::int          AS total_guests
-      FROM rsvps
-      ${where}
-    `;
+    const stats = await prisma.rsvp.aggregate({
+      where: whereCondition,
+      _count: { id: true },
+      _sum: { guestsCount: true },
+    });
 
     return NextResponse.json({
       success: true,
       data: rsvps,
       stats: {
-        totalRSVPs: Number(stats[0].total_confirmations),
-        totalGuests: Number(stats[0].total_guests),
+        totalRSVPs: stats._count.id || 0,
+        totalGuests: stats._sum.guestsCount || 0,
       },
     });
   } catch (error) {

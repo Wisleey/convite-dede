@@ -6,7 +6,9 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "db:init-videos": "tsx scripts/init-videos-db.ts",
+    "setup:videos": "bash setup-videos.sh"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",

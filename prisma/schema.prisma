@@ -28,3 +28,60 @@ model Rsvp {
 
   @@map("Rsvp") // usa exatamente a tabela "Rsvp" no Neon
 }
+
+model EventSettings {
+  id          Int      @id @default(autoincrement())
+  eventName   String   @default("Aniversário de Dedê Sales") @map("event_name")
+  eventDate   DateTime @map("event_date") @db.Timestamptz(6)
+  location    String   @default("Praia de Jacumã, Conde - PB")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  // Relacionamento com vídeos
+  videos      Video[]
+
+  @@map("EventSettings")
+}
+
+// Novo modelo para armazenar vídeos
+model Video {
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(255)
+  description  String?  @db.Text
+  
+  // URLs dos arquivos
+  videoUrl     String   @map("video_url") @db.VarChar(500)
+  thumbnailUrl String?  @map("thumbnail_url") @db.VarChar(500)
+  
+  // Tipo da banda
+  bandType     BandType @default(PRINCIPAL) @map("band_type")
+  
+  // Status e ordem
+  isActive     Boolean  @default(true) @map("is_active")
+  displayOrder Int      @default(0) @map("display_order")
+  
+  // Metadados do arquivo
+  duration     Int?     // duração em segundos
+  fileSize     BigInt?  @map("file_size") // tamanho em bytes
+  mimeType     String?  @map("mime_type") @db.VarChar(100)
+  
+  // Timestamps
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
+  
+  // Relacionamento opcional com evento
+  eventSettingsId Int?          @map("event_settings_id")
+  eventSettings   EventSettings? @relation(fields: [eventSettingsId], references: [id])
+
+  @@map("videos")
+}
+
+// Enum para tipos de banda
+enum BandType {
+  PRINCIPAL
+  ESPECIAL
+  ABERTURA
+  ENCERRAMENTO
+
+  @@map("band_type")
+}

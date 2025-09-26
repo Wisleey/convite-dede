@@ -21,8 +21,8 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Convite de Aniversário - Dedê Sales 50 Anos",
-  description: "Você está convidado para comemorar os 50 anos do Dedê Sales",
+  title: "Convite de Aniversário - Dedé Sales 50 Anos",
+  description: "Você está convidado para comemorar os 50 anos do Dedé Sales",
   generator: "v0.app",
 }
 
