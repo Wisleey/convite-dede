@@ -181,35 +181,56 @@ button[variant="outline"]:hover,
   }
 }
 
-/* FORÇA TODOS OS BOTÕES SEREM VISÍVEIS */
+/* FORÇA TODOS OS BOTÕES SEREM VISÍVEIS - QUALQUER DISPOSITIVO */
 @layer components {
-  /* Botão GPS */
-  button:has(.mr-2):has(.h-5),
-  button:has(.mr-3):has(.h-6) {
+  /* TODOS OS BOTÕES PRINCIPAIS - FORÇA AMARELO */
+  button[class*="bg-yellow-400"],
+  button[class*="border-yellow-400"],
+  button[class*="text-black"],
+  .bg-yellow-400\/90,
+  [class*="bg-yellow-400"] {
     background-color: #fbbf24 !important;
+    background: #fbbf24 !important;
     color: #000000 !important;
     border: 2px solid #fbbf24 !important;
+    border-color: #fbbf24 !important;
   }
-
-  /* Botão Confirmar Presença */
-  button:has([class*="heart"]),
-  button[class*="animate-heartbeat"] {
-    background-color: #fbbf24 !important;
+  
+  /* BOTÕES OUTLINE COM VARIANTE */
+  button[variant="outline"][class*="border-yellow-400"],
+  button[class*="border-2"][class*="border-yellow-400"] {
+    background-color: rgba(251, 191, 36, 0.9) !important;
+    background: rgba(251, 191, 36, 0.9) !important;
     color: #000000 !important;
     border: 2px solid #fbbf24 !important;
+    border-color: #fbbf24 !important;
   }
-
-  /* Botão Adicionar ao Calendário */
-  button:has([class*="calendar"]) {
-    background-color: transparent !important;
-    color: #fbbf24 !important;
-    border: 2px solid #fbbf24 !important;
+  
+  /* FORÇA ESPECÍFICA PARA MOBILE */
+  @media (max-width: 768px) {
+    button {
+      background-color: #fbbf24 !important;
+      color: #000000 !important;
+      border: 2px solid #fbbf24 !important;
+    }
+    
+    button[variant="outline"] {
+      background-color: rgba(251, 191, 36, 0.9) !important;
+    }
+  }
+  
+  /* REMOVE BACKDROP BLUR EM MOBILE - CAUSA PROBLEMAS */
+  @media (max-width: 768px) {
+    .backdrop-blur-sm {
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
   }
 
   /* Hover states */
   button:hover {
     opacity: 0.9 !important;
-    transform: scale(1.02) !important;
+    background-color: #fbbf24 !important;
   }
 
   /* Força visibilidade de inputs */
