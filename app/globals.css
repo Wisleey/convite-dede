@@ -1,321 +1,145 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  /* Atualizando cores para tema dourado e preto do convite */
-  --background: oklch(1 0 0); /* Branco */
-  --foreground: oklch(0.2 0 0); /* Preto escuro */
-  --card: oklch(0.98 0.02 85); /* Bege claro dourado */
-  --card-foreground: oklch(0.2 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0 0);
-  --primary: oklch(0.65 0.15 85); /* Dourado principal */
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.55 0.2 25); /* Vermelho elegante */
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.98 0.02 85); /* Bege suave */
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.65 0.15 85); /* Dourado para acentos */
-  --accent-foreground: oklch(0.1 0 0);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.9 0.01 85);
-  --input: oklch(0.97 0.01 85);
-  --ring: oklch(0.65 0.15 85);
-  --chart-1: oklch(0.7 0.18 85);
-  --chart-2: oklch(0.55 0.2 25);
-  --chart-3: oklch(0.5 0.15 200);
-  --chart-4: oklch(0.65 0.15 85);
-  --chart-5: oklch(0.7 0.18 85);
-  --radius: 0.5rem;
-  --sidebar: oklch(0.98 0.02 85);
-  --sidebar-foreground: oklch(0.2 0 0);
-  --sidebar-primary: oklch(0.65 0.15 85);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.55 0.2 25);
-  --sidebar-accent-foreground: oklch(1 0 0);
-  --sidebar-border: oklch(0.9 0.01 85);
-  --sidebar-ring: oklch(0.65 0.15 85);
-}
-
-.dark {
-  /* Tema escuro com dourado e preto */
-  --background: oklch(0.1 0 0); /* Preto profundo */
-  --foreground: oklch(0.95 0.02 85); /* Dourado claro */
-  --card: oklch(0.15 0 0);
-  --card-foreground: oklch(0.95 0.02 85);
-  --popover: oklch(0.1 0 0);
-  --popover-foreground: oklch(0.95 0.02 85);
-  --primary: oklch(0.75 0.18 85); /* Dourado brilhante */
-  --primary-foreground: oklch(0.1 0 0);
-  --secondary: oklch(0.25 0 0);
-  --secondary-foreground: oklch(0.95 0.02 85);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0.05 85);
-  --accent: oklch(0.25 0 0);
-  --accent-foreground: oklch(0.95 0.02 85);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.95 0.02 85);
-  --border: oklch(0.25 0 0);
-  --input: oklch(0.25 0 0);
-  --ring: oklch(0.45 0.1 85);
-  --chart-1: oklch(0.75 0.18 85);
-  --chart-2: oklch(0.65 0.15 162);
-  --chart-3: oklch(0.7 0.15 70);
-  --chart-4: oklch(0.6 0.2 303);
-  --chart-5: oklch(0.65 0.18 16);
-  --sidebar: oklch(0.15 0 0);
-  --sidebar-foreground: oklch(0.95 0.02 85);
-  --sidebar-primary: oklch(0.75 0.18 85);
-  --sidebar-primary-foreground: oklch(0.1 0 0);
-  --sidebar-accent: oklch(0.25 0 0);
-  --sidebar-accent-foreground: oklch(0.95 0.02 85);
-  --sidebar-border: oklch(0.25 0 0);
-  --sidebar-ring: oklch(0.45 0.1 85);
-}
-
-@theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  /* Substituindo fontes serif por fontes modernas */
-  --font-inter: var(--font-inter);
-  --font-poppins: var(--font-poppins);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-}
-
+/* TEMA GLOBAL FORÇADO - SEMPRE ESCURO */
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
+  
+  html {
+    color-scheme: dark;
+    background: #000000;
+  }
+  
   body {
-    @apply bg-background text-foreground;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+    color: #ffd700;
+    font-family: var(--font-inter), system-ui, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
   }
 }
 
-/* Adicionando animações personalizadas para o convite */
+/* VARIÁVEIS DE CORES - TEMA DOURADO E PRETO */
+:root {
+  --background: #000000;
+  --foreground: #ffd700;
+  --card: #1a1a1a;
+  --card-foreground: #ffd700;
+  --popover: #000000;
+  --popover-foreground: #ffd700;
+  --primary: #ffd700;
+  --primary-foreground: #000000;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffd700;
+  --muted: #1a1a1a;
+  --muted-foreground: #b8860b;
+  --accent: #ffd700;
+  --accent-foreground: #000000;
+  --destructive: #ff4444;
+  --destructive-foreground: #ffffff;
+  --border: #333333;
+  --input: #1a1a1a;
+  --ring: #ffd700;
+  --radius: 0.5rem;
+}
+
+/* ANIMAÇÕES PERSONALIZADAS PARA O CONVITE */
 @keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 @keyframes sparkle {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.5;
-    transform: scale(1.1);
-  }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.1); }
 }
 
 @keyframes goldPulse {
-  0%,
-  100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2),
-      0 0 60px rgba(255, 215, 0, 0.1);
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4),
-      0 0 90px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4), 0 0 90px rgba(255, 215, 0, 0.3);
   }
 }
 
 @keyframes slideInLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideInRight {
-  0% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
 }
 
 @keyframes slideInUp {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  0% { transform: translateY(100%); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 @keyframes fadeInScale {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes rotateGlow {
-  0% {
-    transform: rotate(0deg);
-    filter: hue-rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-    filter: hue-rotate(360deg);
-  }
+  0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
+  100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
 }
 
 @keyframes textShimmer {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
 }
 
 @keyframes bounceIn {
-  0% {
-    transform: scale(0.3) rotate(-10deg);
-    opacity: 0;
-  }
-  50% {
-    transform: scale(1.05) rotate(5deg);
-  }
-  70% {
-    transform: scale(0.9) rotate(-2deg);
-  }
-  100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 1;
-  }
+  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  50% { transform: scale(1.05) rotate(5deg); }
+  70% { transform: scale(0.9) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
 }
 
 @keyframes heartbeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  14% {
-    transform: scale(1.1);
-  }
-  28% {
-    transform: scale(1);
-  }
-  42% {
-    transform: scale(1.1);
-  }
-  70% {
-    transform: scale(1);
-  }
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.1); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.1); }
+  70% { transform: scale(1); }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 
-.animate-sparkle {
-  animation: sparkle 2s ease-in-out infinite;
+@keyframes confettiFall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
 }
 
-.animate-gold-pulse {
-  animation: goldPulse 2s ease-in-out infinite;
-}
-
-.animate-slide-in-left {
-  animation: slideInLeft 1s ease-out;
-}
-
-.animate-slide-in-right {
-  animation: slideInRight 1s ease-out;
-}
-
-.animate-slide-in-up {
-  animation: slideInUp 1s ease-out;
-}
-
-.animate-fade-in-scale {
-  animation: fadeInScale 1.2s ease-out;
-}
-
-.animate-rotate-glow {
-  animation: rotateGlow 8s linear infinite;
-}
+/* CLASSES DE ANIMAÇÃO */
+.animate-float { animation: float 3s ease-in-out infinite; }
+.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
+.animate-gold-pulse { animation: goldPulse 2s ease-in-out infinite; }
+.animate-slide-in-left { animation: slideInLeft 1s ease-out; }
+.animate-slide-in-right { animation: slideInRight 1s ease-out; }
+.animate-slide-in-up { animation: slideInUp 1s ease-out; }
+.animate-fade-in-scale { animation: fadeInScale 1.2s ease-out; }
+.animate-rotate-glow { animation: rotateGlow 8s linear infinite; }
+.animate-bounce-in { animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+.animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
 
 .animate-text-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 215, 0, 0.8),
-    transparent
-  );
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), transparent);
   background-size: 200% 100%;
   animation: textShimmer 3s ease-in-out infinite;
 }
 
-.animate-bounce-in {
-  animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.animate-heartbeat {
-  animation: heartbeat 2s ease-in-out infinite;
-}
-
-/* Efeitos de hover melhorados */
+/* EFEITOS ESPECIAIS */
 .hover-lift {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -332,25 +156,13 @@
 }
 
 .video-glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2),
-    inset 0 0 20px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
-/* Efeitos adicionais para tornar o convite mais impactante */
 .golden-border {
   background: linear-gradient(45deg, #ffd700, #ffed4e, #ffd700);
   background-size: 200% 200%;
   animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
 }
 
 .celebration-confetti::before {
@@ -360,19 +172,18 @@
   font-size: 1.5rem;
 }
 
-@keyframes confettiFall {
-  0% {
-    transform: translateY(-100vh) rotate(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100vh) rotate(360deg);
-    opacity: 0;
-  }
+.golden-text-glow {
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
-/* Efeito de brilho dourado nos textos importantes */
-.golden-text-glow {
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
-    0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+/* FONTES */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-poppins: 'Poppins', system-ui, sans-serif;
 }
+
+.font-inter { font-family: var(--font-inter); }
+.font-poppins { font-family: var(--font-poppins); }

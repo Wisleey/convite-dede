@@ -269,8 +269,48 @@ export function BirthdayInvitation() {
 
   const openInGPS = () => {
     const { lat, lng } = eventDetails.coordinates;
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
-    window.open(url, "_blank");
+    const address = encodeURIComponent(eventDetails.address);
+    
+    // Detectar dispositivo móvel
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+      // Para dispositivos móveis, tentar abrir app nativo primeiro
+      if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        // iOS - tenta Apple Maps primeiro, depois Google Maps
+        const appleUrl = `maps://maps.apple.com/?daddr=${lat},${lng}`;
+        const googleUrl = `comgooglemaps://?daddr=${lat},${lng}`;
+        const fallbackUrl = `https://maps.google.com/maps?daddr=${lat},${lng}`;
+        
+        // Tenta abrir Apple Maps
+        window.location.href = appleUrl;
+        
+        // Fallback para Google Maps se Apple Maps não estiver disponível
+        setTimeout(() => {
+          window.location.href = googleUrl;
+        }, 500);
+        
+        // Fallback final para web
+        setTimeout(() => {
+          window.open(fallbackUrl, "_blank");
+        }, 1000);
+      } else {
+        // Android - tenta Google Maps app primeiro
+        const googleAppUrl = `google.navigation:q=${lat},${lng}`;
+        const fallbackUrl = `https://maps.google.com/maps?daddr=${lat},${lng}`;
+        
+        window.location.href = googleAppUrl;
+        
+        // Fallback para web se app não estiver disponível
+        setTimeout(() => {
+          window.open(fallbackUrl, "_blank");
+        }, 1000);
+      }
+    } else {
+      // Desktop - abre Google Maps web com direções
+      const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}&travelmode=driving`;
+      window.open(url, "_blank");
+    }
   };
 
   const addToCalendar = () => {
