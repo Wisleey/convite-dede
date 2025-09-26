@@ -1,85 +1,132 @@
 @import "tailwindcss";
 
-/* FORÇA CORES ESPECÍFICAS PARA MOBILE */
+/* FORÇA MOBILE IGUAL AO DESKTOP - TODOS OS ELEMENTOS AMARELOS */
 @media (max-width: 768px) {
-  /* Força todos os botões serem amarelos */
+  /* FORÇA TODOS OS BOTÕES - SEM EXCEÇÃO */
   button,
-  [role="button"] {
+  [role="button"],
+  .btn,
+  input[type="button"],
+  input[type="submit"] {
     background-color: #fbbf24 !important;
-    color: #000000 !important;
-    border-color: #fbbf24 !important;
-  }
-
-  /* Força textos dourados */
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    color: #fbbf24 !important;
-  }
-
-  /* Força ícones dourados */
-  svg {
-    color: #fbbf24 !important;
-    fill: #fbbf24 !important;
-  }
-
-  /* Força badges amarelos */
-  .bg-gradient-to-r {
     background: #fbbf24 !important;
     color: #000000 !important;
+    border: 2px solid #fbbf24 !important;
+    border-color: #fbbf24 !important;
   }
-
-  /* Força inputs visíveis */
+  
+  /* FORÇA BOTÕES COM CLASSES ESPECÍFICAS */
+  .bg-gradient-to-r,
+  .bg-yellow-400,
+  .bg-yellow-300,
+  .bg-yellow-500,
+  .bg-yellow-600,
+  .bg-gold-400,
+  .bg-gold-500,
+  .bg-gold-600 {
+    background: #fbbf24 !important;
+    background-color: #fbbf24 !important;
+    color: #000000 !important;
+  }
+  
+  /* FORÇA TEXTOS E TÍTULOS DOURADOS */
+  h1, h2, h3, h4, h5, h6,
+  .text-yellow-400,
+  .text-yellow-300,
+  .text-yellow-500,
+  .text-yellow-600,
+  .text-gold-400,
+  .text-gold-500,
+  .text-gold-600 {
+    color: #fbbf24 !important;
+  }
+  
+  /* FORÇA TODOS OS ÍCONES SVG */
+  svg,
+  svg path,
+  .lucide,
+  .icon {
+    color: #fbbf24 !important;
+    fill: #fbbf24 !important;
+    stroke: #fbbf24 !important;
+  }
+  
+  /* FORÇA BADGES E LABELS */
+  .badge,
+  label,
+  .label {
+    background-color: #fbbf24 !important;
+    color: #000000 !important;
+  }
+  
+  /* FORÇA BORDAS DOURADAS */
+  .border-yellow-400,
+  .border-yellow-300,
+  .border-yellow-500,
+  .border-yellow-600,
+  .border-gold-400,
+  .border-gold-500,
+  .border-gold-600 {
+    border-color: #fbbf24 !important;
+  }
+  
+  /* FORÇA INPUTS VISÍVEIS */
   input,
   textarea,
   select {
     background-color: #1a1a1a !important;
     color: #fbbf24 !important;
+    border: 1px solid #fbbf24 !important;
     border-color: #fbbf24 !important;
   }
-
-  /* Força labels dourados */
-  label {
-    color: #fbbf24 !important;
+  
+  /* FORÇA PLACEHOLDERS VISÍVEIS */
+  input::placeholder,
+  textarea::placeholder {
+    color: #888888 !important;
   }
-
-  /* Força elementos com texto dourado */
-  .text-yellow-400,
-  .text-yellow-300,
-  .text-yellow-500,
-  .text-yellow-600 {
-    color: #fbbf24 !important;
-  }
-
-  /* Força elementos com background dourado */
-  .bg-yellow-400,
-  .bg-yellow-300,
-  .bg-yellow-500,
-  .bg-yellow-600 {
-    background-color: #fbbf24 !important;
+  
+  /* FORÇA ELEMENTOS DE HOVER */
+  button:hover,
+  [role="button"]:hover {
+    background-color: #f59e0b !important;
     color: #000000 !important;
   }
-
-  /* Força bordas douradas */
-  .border-yellow-400,
-  .border-yellow-300,
-  .border-yellow-500,
-  .border-yellow-600 {
-    border-color: #fbbf24 !important;
+  
+  /* FORÇA TODOS OS SPANS E DIVS COM TEXTO */
+  span,
+  div,
+  p {
+    color: inherit !important;
+  }
+  
+  /* FORÇA ELEMENTOS ESPECÍFICOS DO PROJETO */
+  .animate-heartbeat,
+  .animate-bounce,
+  .animate-pulse {
+    color: #fbbf24 !important;
+  }
+  
+  /* FORÇA CARDS E CONTAINERS */
+  .glass-effect {
+    background: rgba(0, 0, 0, 0.8) !important;
+    border: 1px solid #fbbf24 !important;
   }
 }
 
 /* FORÇA CORES PARA TODOS OS DISPOSITIVOS */
-.bg-gradient-to-r.from-yellow-400 {
+.bg-gradient-to-r.from-yellow-400,
+.bg-gradient-to-r.from-gold-400 {
   background: #fbbf24 !important;
   color: #000000 !important;
 }
 
 .text-black {
   color: #000000 !important;
+}
+
+.text-white {
+  color: #ffffff !important;
 }
 
 /* EFEITOS ESPECIAIS - SEM ESTILIZAÇÃO */
@@ -99,11 +146,9 @@
 }
 
 .video-glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2),
-    inset 0 0 20px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 .golden-text-glow {
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
-    0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
 }
