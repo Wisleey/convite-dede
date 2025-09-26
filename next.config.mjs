@@ -17,26 +17,26 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*',
+        source: "/:path*",
         headers: [
           {
-            key: 'Cache-Control',
-            value: 'public, max-age=0, s-maxage=86400, stale-while-revalidate=86400',
+            key: "Cache-Control",
+            value:
+              "public, max-age=0, s-maxage=86400, stale-while-revalidate=86400",
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
         ],
       },
     ];
   },
   // Configuração PWA
-  output: 'standalone',
   poweredByHeader: false,
 };
 

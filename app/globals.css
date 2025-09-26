@@ -3,54 +3,68 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* FORÇAR FUNDO PRETO SEMPRE - TODOS OS DISPOSITIVOS */
+/* FORÇA TOTAL - FUNDO PRETO EM QUALQUER LUGAR */
+* {
+  box-sizing: border-box !important;
+}
+
+html, body, #__next, #root, [data-reactroot] {
+  background-color: #000000 !important;
+  background: #000000 !important;
+  color: #ffd700 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+}
+
+html {
+  color-scheme: dark !important;
+  -webkit-color-scheme: dark !important;
+  -webkit-text-size-adjust: 100% !important;
+  -ms-text-size-adjust: 100% !important;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  overflow-x: hidden !important;
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%) !important;
+}
+
+/* FORÇA EM TODOS OS ELEMENTOS */
+div, main, section, article, header, footer, nav, aside {
+  background-color: transparent !important;
+}
+
+/* FORÇA PARA MOBILE E WEBKIT */
+@supports (-webkit-appearance: none) {
+  html, body {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+}
+
+/* FORÇA PARA TODOS OS MEDIA QUERIES */
+@media screen {
+  html, body {
+    background-color: #000000 !important;
+    color: #ffd700 !important;
+  }
+}
+
+@media (max-width: 768px) {
+  html, body {
+    background-color: #000000 !important;
+    background: #000000 !important;
+  }
+}
+
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-  }
-  
-  html {
-    background-color: #000000 !important;
-    color-scheme: dark;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-  }
-  
-  html,
-  body {
-    background: #000000 !important;
-    color: #ffd700 !important;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100vh;
-    font-family: system-ui, -apple-system, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  body {
-    @apply bg-black text-foreground;
-    background: linear-gradient(
-      135deg,
-      #000000 0%,
-      #1a1a1a 50%,
-      #000000 100%
-    ) !important;
-    overflow-x: hidden;
-  }
-  
-  /* Força tema escuro em WebKit/Safari */
-  @media (prefers-color-scheme: dark) {
-    html {
-      color-scheme: dark;
-    }
-  }
-  
-  /* Força tema escuro independente da preferência */
-  html:not(.light) {
-    color-scheme: dark;
-    background: #000000 !important;
+    border-color: rgba(255, 215, 0, 0.2) !important;
+    outline-color: rgba(255, 215, 0, 0.5) !important;
   }
 }
 
