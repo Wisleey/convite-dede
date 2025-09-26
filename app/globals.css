@@ -3,15 +3,58 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* TEMA PRETO SIMPLES */
+/* TEMA PRETO FORÇADO E BOTÕES VISÍVEIS */
+* {
+  box-sizing: border-box;
+}
+
 html {
-  background-color: #000000;
-  color-scheme: dark;
+  background-color: #000000 !important;
+  color-scheme: dark !important;
 }
 
 body {
-  background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
-  color: #ffd700;
+  background: linear-gradient(
+    135deg,
+    #000000 0%,
+    #1a1a1a 50%,
+    #000000 100%
+  ) !important;
+  color: #ffd700 !important;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* FORÇA BOTÕES VISÍVEIS */
+button,
+.btn,
+[role="button"] {
+  color: inherit !important;
+}
+
+/* BOTÕES ESPECÍFICOS DO CONVITE */
+button[class*="bg-yellow"],
+button[class*="border-yellow"],
+.bg-yellow-400,
+.border-yellow-400 {
+  background-color: #fbbf24 !important;
+  border-color: #fbbf24 !important;
+  color: #000000 !important;
+}
+
+/* BOTÕES OUTLINE/GHOST */
+button[variant="outline"],
+.variant-outline {
+  background-color: transparent !important;
+  border: 2px solid #fbbf24 !important;
+  color: #fbbf24 !important;
+}
+
+button[variant="outline"]:hover,
+.variant-outline:hover {
+  background-color: #fbbf24 !important;
+  color: #000000 !important;
 }
 
 :root {
@@ -138,84 +181,225 @@ body {
   }
 }
 
+/* FORÇA TODOS OS BOTÕES SEREM VISÍVEIS */
+@layer components {
+  /* Botão GPS */
+  button:has(.mr-2):has(.h-5),
+  button:has(.mr-3):has(.h-6) {
+    background-color: #fbbf24 !important;
+    color: #000000 !important;
+    border: 2px solid #fbbf24 !important;
+  }
+
+  /* Botão Confirmar Presença */
+  button:has([class*="heart"]),
+  button[class*="animate-heartbeat"] {
+    background-color: #fbbf24 !important;
+    color: #000000 !important;
+    border: 2px solid #fbbf24 !important;
+  }
+
+  /* Botão Adicionar ao Calendário */
+  button:has([class*="calendar"]) {
+    background-color: transparent !important;
+    color: #fbbf24 !important;
+    border: 2px solid #fbbf24 !important;
+  }
+
+  /* Hover states */
+  button:hover {
+    opacity: 0.9 !important;
+    transform: scale(1.02) !important;
+  }
+
+  /* Força visibilidade de inputs */
+  input,
+  textarea,
+  select {
+    background-color: #1a1a1a !important;
+    color: #ffd700 !important;
+    border: 1px solid #fbbf24 !important;
+  }
+
+  /* Força visibilidade de labels */
+  label {
+    color: #fbbf24 !important;
+  }
+}
+
 /* Animações personalizadas para o convite */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes sparkle {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.1); }
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
 }
 
 @keyframes goldPulse {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2), 0 0 60px rgba(255, 215, 0, 0.1);
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.2),
+      0 0 60px rgba(255, 215, 0, 0.1);
   }
   50% {
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4), 0 0 90px rgba(255, 215, 0, 0.3);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 215, 0, 0.4),
+      0 0 90px rgba(255, 215, 0, 0.3);
   }
 }
 
 @keyframes slideInLeft {
-  0% { transform: translateX(-100%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideInRight {
-  0% { transform: translateX(100%); opacity: 0; }
-  100% { transform: translateX(0); opacity: 1; }
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 @keyframes slideInUp {
-  0% { transform: translateY(100%); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes fadeInScale {
-  0% { transform: scale(0.8); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 @keyframes rotateGlow {
-  0% { transform: rotate(0deg); filter: hue-rotate(0deg); }
-  100% { transform: rotate(360deg); filter: hue-rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+    filter: hue-rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: hue-rotate(360deg);
+  }
 }
 
 @keyframes textShimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
 }
 
 @keyframes bounceIn {
-  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
-  50% { transform: scale(1.05) rotate(5deg); }
-  70% { transform: scale(0.9) rotate(-2deg); }
-  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  0% {
+    transform: scale(0.3) rotate(-10deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05) rotate(5deg);
+  }
+  70% {
+    transform: scale(0.9) rotate(-2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: scale(1); }
-  14% { transform: scale(1.1); }
-  28% { transform: scale(1); }
-  42% { transform: scale(1.1); }
-  70% { transform: scale(1); }
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
 }
 
-.animate-float { animation: float 3s ease-in-out infinite; }
-.animate-sparkle { animation: sparkle 2s ease-in-out infinite; }
-.animate-gold-pulse { animation: goldPulse 2s ease-in-out infinite; }
-.animate-slide-in-left { animation: slideInLeft 1s ease-out; }
-.animate-slide-in-right { animation: slideInRight 1s ease-out; }
-.animate-slide-in-up { animation: slideInUp 1s ease-out; }
-.animate-fade-in-scale { animation: fadeInScale 1.2s ease-out; }
-.animate-rotate-glow { animation: rotateGlow 8s linear infinite; }
-.animate-bounce-in { animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
-.animate-heartbeat { animation: heartbeat 2s ease-in-out infinite; }
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+.animate-sparkle {
+  animation: sparkle 2s ease-in-out infinite;
+}
+.animate-gold-pulse {
+  animation: goldPulse 2s ease-in-out infinite;
+}
+.animate-slide-in-left {
+  animation: slideInLeft 1s ease-out;
+}
+.animate-slide-in-right {
+  animation: slideInRight 1s ease-out;
+}
+.animate-slide-in-up {
+  animation: slideInUp 1s ease-out;
+}
+.animate-fade-in-scale {
+  animation: fadeInScale 1.2s ease-out;
+}
+.animate-rotate-glow {
+  animation: rotateGlow 8s linear infinite;
+}
+.animate-bounce-in {
+  animation: bounceIn 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
 
 .animate-text-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.8), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 215, 0, 0.8),
+    transparent
+  );
   background-size: 200% 100%;
   animation: textShimmer 3s ease-in-out infinite;
 }
@@ -237,7 +421,8 @@ body {
 }
 
 .video-glow {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2), inset 0 0 20px rgba(255, 215, 0, 0.1);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.2),
+    inset 0 0 20px rgba(255, 215, 0, 0.1);
 }
 
 /* Efeitos adicionais para tornar o convite mais impactante */
@@ -248,8 +433,13 @@ body {
 }
 
 @keyframes gradientShift {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 .celebration-confetti::before {
@@ -260,13 +450,20 @@ body {
 }
 
 @keyframes confettiFall {
-  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
-  100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
 }
 
 /* Efeito de brilho dourado nos textos importantes */
 .golden-text-glow {
-  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6), 0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.8), 0 0 10px rgba(255, 215, 0, 0.6),
+    0 0 15px rgba(255, 215, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 /* Importação das fontes */
@@ -279,5 +476,9 @@ body {
   --font-poppins: "Poppins", system-ui, sans-serif;
 }
 
-.font-inter { font-family: var(--font-inter); }
-.font-poppins { font-family: var(--font-poppins); }
+.font-inter {
+  font-family: var(--font-inter);
+}
+.font-poppins {
+  font-family: var(--font-poppins);
+}
