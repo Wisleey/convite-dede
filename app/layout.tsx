@@ -32,8 +32,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${poppins.variable}`}>
+    <html lang="pt-BR" className="dark" style={{ colorScheme: 'dark' }}>
+      <head>
+        <meta name="color-scheme" content="dark" />
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            html { color-scheme: dark !important; }
+            body { background-color: #000000 !important; color: #fbbf24 !important; }
+          `
+        }} />
+      </head>
+      <body className={`dark bg-black text-yellow-400 font-sans ${GeistSans.variable} ${GeistMono.variable} ${inter.variable} ${poppins.variable}`}>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
       </body>
