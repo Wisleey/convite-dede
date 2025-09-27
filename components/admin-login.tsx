@@ -22,7 +22,7 @@ export function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps) {
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
-  const ADMIN_PASSWORD = "dede50anos";
+  const ADMIN_PASSWORD = "240101";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -138,7 +138,7 @@ export function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps) {
             <p className="text-yellow-400 text-sm font-semibold mb-1">
               Senha de demonstração:
             </p>
-            <p className="text-white/80 text-sm">dede50anos</p>
+            <p className="text-white/80 text-sm">240101</p>
           </div>
         </CardContent>
       </Card>

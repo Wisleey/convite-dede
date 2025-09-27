@@ -467,16 +467,19 @@ END:VCALENDAR`;
                 style={{ animationDelay: "0.3s" }}
               >
                 <div className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent flex-1 max-w-20 sm:max-w-40 animate-pulse" />
-                <div className="relative animate-heartbeat">
-                  <span className="text-6xl md:text-8xl lg:text-[10rem] font-black text-yellow-400 font-poppins">
+                <div className="relative mx-auto w-fit text-center animate-heartbeat">
+                  <span className="block text-6xl md:text-8xl lg:text-[10rem] font-black text-yellow-400 font-poppins">
                     {eventDetails.age}
                   </span>
-                  <div className="absolute -top-8 -right-8 animate-bounce">
+
+                  {/* no mobile: centralizado acima | em md+: volta pro topo-direito */}
+                  <div className="absolute -top-8 left-2/2 -translate-x-1/2 md:left-auto md:right-6 md:translate-x-0 md:-top-10 animate-bounce">
                     <div className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full p-2 shadow-lg">
                       <Gift className="h-6 w-6" />
                     </div>
                   </div>
                 </div>
+
                 <div
                   className="h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent flex-1 max-w-20 sm:max-w-40 animate-pulse"
                   style={{ animationDelay: "0.5s" }}
