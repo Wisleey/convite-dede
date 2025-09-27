@@ -133,13 +133,6 @@ export function AdminLogin({ isOpen, onClose, onLogin }: AdminLoginProps) {
               )}
             </Button>
           </form>
-
-          <div className="mt-6 p-4 bg-yellow-400/10 border border-yellow-400/20 rounded-lg">
-            <p className="text-yellow-400 text-sm font-semibold mb-1">
-              Senha de demonstração:
-            </p>
-            <p className="text-white/80 text-sm">240101</p>
-          </div>
         </CardContent>
       </Card>
     </div>

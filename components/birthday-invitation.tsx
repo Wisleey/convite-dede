@@ -20,6 +20,7 @@ import {
   Volume2,
   VolumeX,
   X,
+  ChevronUp,
 } from "lucide-react";
 import { LocationMap } from "./location-map";
 import { RSVPForm } from "./rsvp-form";
@@ -501,6 +502,32 @@ END:VCALENDAR`;
                 </p>
                 <Sparkles className="absolute -top-3 -right-3 w-8 h-8 text-yellow-400 animate-sparkle" />
                 <Heart className="absolute -bottom-3 -left-3 w-6 h-6 text-yellow-500 animate-heartbeat" />
+              </div>
+              <div className="mt-6 mb-8">
+                <button className="group relative bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 text-black font-medium px-6 py-3 rounded-full shadow-md hover:shadow-lg transform transition-all duration-300 hover:scale-105 animate-pulse-glow">
+                  <div className="flex items-center justify-center space-x-2">
+                    <span className="text-sm font-medium tracking-wide">
+                      ARRASTE PARA CIMA
+                    </span>
+                    <div className="flex flex-col ">
+                      <ChevronUp
+                        className="w-4 h-4 animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                      />
+                      <ChevronUp
+                        className="w-4 h-4 animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                      />
+                      <ChevronUp
+                        className="w-4 h-4 animate-bounce"
+                        style={{ animationDelay: "0.2s" }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Golden glow effect - mais sutil */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600 rounded-full blur-md opacity-20 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
+                </button>
               </div>
             </div>
 

@@ -260,33 +260,6 @@ END:VCALENDAR`;
               style={{ animationDelay: "0.8s" }}
             ></div>
 
-            <div
-              className="animate-fade-in-scale"
-              style={{ animationDelay: "1.2s" }}
-            >
-              <Label
-                htmlFor="guests_count"
-                className="text-yellow-400 font-semibold flex items-center gap-2 mb-2"
-              >
-                <Users className="h-4 w-4 animate-bounce" />
-                Número de Convidados
-              </Label>
-              <select
-                id="guests_count"
-                name="guests_count"
-                value={formData.guests_count}
-                onChange={handleChange}
-                className="w-full px-4 py-3 glass-effect border border-yellow-400/40 rounded-md focus:border-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400/30 text-white transition-all duration-300 hover:border-yellow-400/60 focus:shadow-lg focus:shadow-yellow-400/20"
-              >
-                <option value={1}>1 pessoa (só eu)</option>
-                <option value={2}>2 pessoas</option>
-                <option value={3}>3 pessoas</option>
-                <option value={4}>4 pessoas</option>
-                <option value={5}>5 pessoas</option>
-                <option value={6}>6 pessoas</option>
-              </select>
-            </div>
-
             {formData.guests_count > 1 && (
               <div className="space-y-4">
                 <Label className="text-yellow-400 font-semibold flex items-center gap-2">
