@@ -567,57 +567,60 @@ END:VCALENDAR`;
                   </p>
                 </div>
 
-                {/* Video Grid */}
-                <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-8">
-                  {/* Video 1 - Principal */}
+                {/* Video 1 - Principal */}
+                <div
+                  className="relative group animate-fade-in-scale max-w-[820px] mx-auto"
+                  style={{ animationDelay: "1.8s" }}
+                >
+                  {/* ALTURA CONTROLADA POR BREAKPOINTS */}
                   <div
-                    className="relative group animate-fade-in-scale"
-                    style={{ animationDelay: "1.8s" }}
+                    className="relative h-[480px] sm:h-[360px] md:h-[440px] lg:h-[520px]
+                  rounded-2xl overflow-hidden border-2 border-yellow-400/40
+                  video-glow hover:border-yellow-400/60 transition-all duration-500
+                  hover:shadow-2xl hover:shadow-yellow-400/40"
                   >
-                    <div className="relative aspect-video rounded-2xl overflow-hidden border-2 border-yellow-400/40 video-glow hover:border-yellow-400/60 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-400/40">
-                      <video
-                        ref={video1Ref}
-                        className="w-full h-full object-cover"
-                        poster={
-                          principalVideo?.thumbnailUrl ||
-                          "/images/banda1-thumbnail.jpg"
-                        }
-                        preload="metadata"
-                        muted={true}
-                        controls={false}
-                        playsInline
+                    <video
+                      ref={video1Ref}
+                      className="absolute inset-0 w-full h-full object-cover"
+                      poster={
+                        principalVideo?.thumbnailUrl ||
+                        "/images/banda1-thumbnail.jpg"
+                      }
+                      preload="metadata"
+                      muted
+                      controls={false}
+                      playsInline
+                    >
+                      <source
+                        src={principalVideo?.videoUrl || "/videos/dede.mp4"}
+                        type="video/mp4"
+                      />
+                      Seu navegador não suporta o elemento de vídeo.
+                    </video>
+
+                    <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-yellow-900/30 z-10 pointer-events-none" />
+
+                    <div className="absolute inset-0 flex items-center justify-center z-20">
+                      <button
+                        className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full p-4 sm:p-6 shadow-2xl shadow-yellow-400/50 hover:scale-110 transition-all duration-300 animate-heartbeat group-hover:shadow-yellow-400/70 hover:from-yellow-300 hover:to-yellow-500"
+                        onClick={handleVideo1PlayPause}
+                        aria-label="Assistir vídeo em tela cheia"
                       >
-                        <source
-                          src={principalVideo?.videoUrl || "/videos/dede.mp4"}
-                          type="video/mp4"
-                        />
-                        Seu navegador não suporta o elemento de vídeo.
-                      </video>
-
-                      <div className="absolute inset-0 bg-gradient-to-br from-black/60 via-transparent to-yellow-900/30 z-10 pointer-events-none" />
-
-                      <div className="absolute inset-0 flex items-center justify-center z-20">
-                        <button
-                          className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black rounded-full p-4 sm:p-6 shadow-2xl shadow-yellow-400/50 hover:scale-110 transition-all duration-300 animate-heartbeat group-hover:shadow-yellow-400/70 hover:from-yellow-300 hover:to-yellow-500"
-                          onClick={handleVideo1PlayPause}
-                          aria-label="Assistir vídeo em tela cheia"
-                        >
-                          <Play className="h-8 w-8 sm:h-12 sm:w-12 ml-1" />
-                        </button>
-                      </div>
-
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-4 sm:p-6 z-20 pointer-events-none">
-                        <h4 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-2 font-poppins">
-                          🎸 {principalVideo?.title || "BANDA PRINCIPAL"}
-                        </h4>
-                        <p className="text-white/90 text-sm sm:text-base font-inter">
-                          {principalVideo?.description ||
-                            "Os maiores sucessos para embalar nossa celebração"}
-                        </p>
-                      </div>
-
-                      <Sparkles className="absolute top-4 left-4 w-5 h-5 text-yellow-400 animate-sparkle z-20 pointer-events-none" />
+                        <Play className="h-8 w-8 sm:h-12 sm:w-12 ml-1" />
+                      </button>
                     </div>
+
+                    <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/95 via-black/80 to-transparent p-4 sm:p-6 z-20 pointer-events-none">
+                      <h4 className="text-xl sm:text-2xl font-bold text-yellow-400 mb-2 font-poppins">
+                        🎸 {principalVideo?.title || "BANDA PRINCIPAL"}
+                      </h4>
+                      <p className="text-white/90 text-sm sm:text-base font-inter">
+                        {principalVideo?.description ||
+                          "Os maiores sucessos para embalar nossa celebração"}
+                      </p>
+                    </div>
+
+                    <Sparkles className="absolute top-4 left-4 w-5 h-5 text-yellow-400 animate-sparkle z-20 pointer-events-none" />
                   </div>
                 </div>
 
